@@ -1,0 +1,465 @@
+.card{
+    width: 95vw;
+    margin: 0 auto;
+    /* background-color: #fdf9c5; */
+    /* background-color: none; */
+    /* z-index:1; */
+    /* border: none !important ; */
+}
+.shop_container{
+    /* background-color:  rgb(249,249,249); */
+    background-color:  red;
+}
+/*  */
+.parent_card {
+    display: grid;
+    background-color: #fdf9c5;
+    grid-template-columns: 0.1fr repeat(9, 1fr) 0.1fr;
+    grid-template-rows: 0.1fr repeat(10, 1fr) 0.1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    }
+    .parent_card:hover {
+        display: grid;
+        background-color: #fdf9c5;
+        grid-template-columns: 0.1fr repeat(9, 1fr) 0.1fr;
+        grid-template-rows: 0.1fr repeat(10, 1fr) 0.1fr;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        cursor: pointer;
+        }
+    
+    .div1_card { grid-area: 2 / 8 / 12 / 11; }
+    .div2_card {
+         grid-area: 2 / 4 / 4 / 8; }
+    .div3_card { 
+        text-align: left; 
+        grid-area: 2 / 2 / 4 / 4; }
+    .div4_card { grid-area: 4 / 2 / 6 / 8; }
+    .div5_card { 
+        grid-area: 6 / 2 / 8 / 8; }
+    .div6_card { 
+        
+        text-align: center;
+        grid-area: 8 / 6 / 10 / 8; }
+    .div7_card { 
+        
+        text-align: center;
+        grid-area: 8 / 4 / 10 / 6; }
+    .div8_card { 
+        
+        text-align: center;
+        grid-area: 8 / 2 / 10 / 4; }
+    .div9_card {
+        text-align: center;
+        grid-area: 10 / 6 / 12 / 8; }
+    .div10_card { 
+        text-align: center;
+         grid-area: 10 / 4 / 12 / 6; }
+    .div11_card {
+        text-align: center;
+        grid-area: 10 / 2 / 12 / 4; }
+
+        .price_style{
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    text-align: right;
+    min-width: calc(60% - 10px);
+}
+
+.address_tile_style{
+    font-size: .875rem;
+    color: #363636;
+    line-height: 1.0625rem;
+}
+.data_style{
+    border-top: 1px solid rgba(0,0,0,.1);
+    margin-top: 6px;
+    font-size: .75rem;
+}
+.data_title_style{
+    font-size: .75rem;
+    color: rgba(0,0,0,.5);
+}
+.updated_today{
+    color: rgba(0,0,0,.5);
+    font-size: .75rem;
+    line-height: 12px;
+}
+
+
+     .img1 {
+         max-width: 141px;
+         max-height: 98%;
+         min-height: 97%;
+        border-radius: 5px;
+    } 
+    .parent_shop_filters {
+        
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        max-width: 94vw;
+        margin: 0 auto;   
+        margin-top: 60px !important;
+        text-align: center;
+        }
+        
+        .div1_shop_filters { grid-area: 1 / 4 / 2 / 5; }
+        .div2_shop_filters { grid-area: 1 / 3 / 2 / 4; }
+        .div3_shop_filters { grid-area: 1 / 2 / 2 / 3; }
+        .div4_shop_filters { grid-area: 1 / 1 / 2 / 2; }
+        .div5_shop_filters { grid-area: 2 / 1 / 3 / 5; }
+        .div6_shop_filters { grid-area: 3 / 2 / 4 / 3; }
+        .div7_shop_filters { grid-area: 3 / 3 / 4 / 4; }
+
+.sort_button_main{
+    border: 1px solid black;
+    padding: 3px;
+}
+.filter_button_main{
+    border: 1px solid black;
+    padding: 3px;
+}
+.map_button_main{
+    border: 1px solid #0fca80;
+    padding: 4px;
+}
+.note_for_user{
+    text-align: right;
+    height: 60px;
+    width: 100%;
+    margin-bottom: -10px;
+    border-radius: 2px;
+    border: unset;
+    display: flex;
+    /* padding: 0 10px; */
+    align-items: center;
+    /* justify-content: space-between; */
+    box-shadow: 0 3px 10px 0 rgb(0 0 0 / 15%);
+}
+.amount_of_products{
+    margin-top: -30px;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+}
+.sort_list{
+text-align: right;
+/* float: right; */
+}
+.sort_list input {
+    padding: 10px;
+    color: orange;
+    background-color: orange;
+    /* opacity: 0; */
+    /* width: 0; */
+    /* height: 0; */
+  }
+.sort_list_check{
+    display: inline-block;
+}
+.sort_list_span{
+    display: inline-block;
+}
+.radio_title{
+    margin-right: 10px;
+}
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 200px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+      
+  
+  }
+  
+  /* Hide the browser's default radio button */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a custom radio button */
+  .checkmark {
+    border:3px solid gray;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 50%;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the radio button is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: white;
+        border:2px solid orange;
+  
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    color:black;
+    
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .container .checkmark:after {
+       top: 2px;
+      left: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: orange;
+  }
+  .radios_list{
+      text-align: right;
+      direction: rtl;
+  }
+  .fixed_searchBar{
+      width: 94vw;
+      position: fixed;
+      top: 53px;
+      z-index: 4;
+      background-color: orange;
+    align-items: center;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 6px 0 rgb(0 0 0 / 10%);
+    background-color: #fff;
+    height: 50px;
+    display: flex;
+    flex-grow: 1;
+  }
+  .fixed_searchBar_text{
+    width: calc(100% - 87px);
+    font-family: Rubik,sans-serif;
+    font-size: .875rem;
+    line-height: 1.0625rem;
+    border: none;
+    background: #fff;
+    color: #999;
+    float: right;
+    text-align: right;
+  }
+
+  .parent_acordion {
+      height: 86px;
+      width: 695px;
+      margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.2fr repeat(10, 1fr) 0.2fr;
+    grid-template-rows: 0.2fr repeat(10, 1fr) 0.2fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    border:1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    cursor: pointer;
+    z-index: 99;
+    }
+    
+    .div1_acordion { grid-area: 2 / 10 / 12 / 12; }
+    .div2_acordion { grid-area: 5 / 7 / 7 / 10; }
+    .div3_acordion { grid-area: 7 / 7 / 9 / 10; }
+    .div4_acordion { grid-area: 5 / 6 / 7 / 7; }
+    .div5_acordion { grid-area: 5 / 5 / 7 / 6; }
+    .div6_acordion { grid-area: 5 / 4 / 7 / 5; }
+    .div7_acordion { grid-area: 7 / 6 / 9 / 7; }
+    .div8_acordion { grid-area: 7 / 5 / 9 / 6; }
+    .div9_acordion { grid-area: 7 / 4 / 9 / 5; }
+    .div10_acordion { grid-area: 5 / 2 / 7 / 4; }
+    .div11_acordion { grid-area: 7 / 2 / 9 / 4; }
+
+    .data_acordion{
+        font-size: 16px;
+        text-align: center;
+    }
+    .data_acordion_title{
+        text-align: center;
+        font-size: 14px;
+        color: rgba(0,0,0,.5);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+    }
+    .vip{
+background-color: rgb(253,249,197);
+    }
+.border_left{
+    border-left: 1px solid rgba(0,0,0,.1);
+}
+.show_info{
+    padding-right: 12px;
+    width: 695px;
+    margin: 0 auto;
+  border:1px solid rgba(0,0,0,.125);
+  border-top: none;
+  border-radius: .25rem;
+}
+.show_info_first_title{
+    font-weight: 500;
+    margin: 5px 0;
+    font-size: .875rem;
+    line-height: 1.0625rem;
+}
+.show_info_description{
+    line-height: 1.5em!important;
+    font-size: 14px;
+    font-weight: 400;
+}
+.parent_show_info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    text-align: right;    
+}
+    
+    .div1_show_info { grid-area: 1 / 2 / 2 / 3; }
+    .div2_show_info { grid-area: 2 / 2 / 3 / 3; }
+    .div3_show_info { grid-area: 3 / 2 / 4 / 3; }
+    .div4_show_info { grid-area: 1 / 1 / 2 / 2; }
+    .div5_show_info { grid-area: 2 / 1 / 3 / 2; }
+    .div6_show_info { grid-area: 3 / 1 / 4 / 2; }
+
+    .show_info_title{
+        font-weight: 400;
+    display: inline-block;
+    color: #363636;
+    padding: 0 0 0 5px;
+    font-size: 12px;
+    }
+    .show_info_data{
+         font-size: 12px;
+        font-weight: 500;
+    }
+
+    .parent_show_info_radio {
+        display: grid;
+        grid-template-columns: 1fr 0.2fr 1fr 0.2fr 1fr 0.2fr 1fr 0.2fr;
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 10px;
+        margin-bottom: 15px;
+        }
+        
+        .div1_show_info_radio { grid-area: 1 / 8 / 2 / 9; }
+        .div2_show_info_radio { grid-area: 1 / 7 / 2 / 8; }
+        .div3_show_info_radio { grid-area: 1 / 6 / 2 / 7; }
+        .div4_show_info_radio { grid-area: 1 / 5 / 2 / 6; }
+        .div5_show_info_radio { grid-area: 1 / 4 / 2 / 5; }
+        .div6_show_info_radio { grid-area: 1 / 3 / 2 / 4; }
+        .div7_show_info_radio { grid-area: 1 / 2 / 2 / 3; }
+        .div8_show_info_radio{ grid-area: 1 / 1 / 2 / 2; }
+        .div9_show_info_radio{ grid-area: 2 / 8 / 3 / 9; }
+        .div10_show_info_radio { grid-area: 2 / 7 / 3 / 8; }
+        .div11_show_info_radio { grid-area: 2 / 6 / 3 / 7; }
+        .div12_show_info_radio { grid-area: 2 / 5 / 3 / 6; }
+        .div13_show_info_radio { grid-area: 2 / 4 / 3 / 5; }
+        .div14_show_info_radio { grid-area: 2 / 3 / 3 / 4; }
+        .div15_show_info_radio { grid-area: 2 / 2 / 3 / 3; }
+        .div16_show_info_radio { grid-area: 2 / 1 / 3 / 2; }
+        .div17_show_info_radio { grid-area: 3 / 8 / 4 / 9; }
+        .div18_show_info_radio { grid-area: 3 / 7 / 4 / 8; }
+        .div19_show_info_radio { grid-area: 3 / 6 / 4 / 7; }
+        .div20_show_info_radio { grid-area: 3 / 5 / 4 / 6; }
+        .div21_show_info_radio { grid-area: 3 / 4 / 4 / 5; }
+        .div22_show_info_radio { grid-area: 3 / 3 / 4 / 4; }
+        .div23_show_info_radio { grid-area: 3 / 2 / 4 / 3; }
+        .div24_show_info_radio { grid-area: 3 / 1 / 4 / 2; }
+
+        .show_info_radio_name{
+            font-size: .75rem;
+            line-height: 1.25rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .show_info_radio_name_disable{
+            font-size: .75rem;
+            color:  #b6b6b6;
+
+            line-height: 1.25rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .show_info_icon{
+            width: 24px;
+            height: 24px;
+            font-weight: 400;
+        }
+        .show_info_icon_disable{
+            color:  #b6b6b6;
+            width: 24px;
+            height: 24px;
+            font-weight: 400;
+        }
+        .full_page_background{
+            width: 100vw;
+            height: 100vh;
+            z-index: 1000;
+            top: 0;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(55,55,55);
+        }
+        .slider_and_button{
+            padding: 20px;
+            border:  1px solid blue;
+        }
+        .carousel_back{
+            z-index: 1000;
+            /* position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(129, 15, 15); */
+        }
+.slider{
+    position: absolute;
+    text-align: center;
+    margin: auto;
+    /* border: 1px solid blue; */
+    padding: 10px;
+    width: 300px; 
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2);
+}
+.img_fitter{
+    width: 100%;
+    /* height: 300px; */
+    object-fit: contain;
+}

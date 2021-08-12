@@ -1,0 +1,357 @@
+.card{
+    width: 95vw;
+    margin: 0 auto;
+    background-color: #fdf9c5;z-index:1;
+}
+.shop_container{
+    /* background-color:  rgb(249,249,249); */
+    background-color:  red;
+}
+/*  */
+.parent_card {
+    display: grid;
+    background-color: #fdf9c5;
+    grid-template-columns: 0.1fr repeat(9, 1fr) 0.1fr;
+    grid-template-rows: 0.1fr repeat(10, 1fr) 0.1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    }
+    .parent_card:hover {
+        display: grid;
+        background-color: #fdf9c5;
+        grid-template-columns: 0.1fr repeat(9, 1fr) 0.1fr;
+        grid-template-rows: 0.1fr repeat(10, 1fr) 0.1fr;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        cursor: pointer;
+        }
+    
+    .div1_card { grid-area: 2 / 8 / 12 / 11; }
+    .div2_card {
+         grid-area: 2 / 4 / 4 / 8; }
+    .div3_card { 
+        text-align: left; 
+        grid-area: 2 / 2 / 4 / 4; }
+    .div4_card { grid-area: 4 / 2 / 6 / 8; }
+    .div5_card { 
+        grid-area: 6 / 2 / 8 / 8; }
+    .div6_card { 
+        
+        text-align: center;
+        grid-area: 8 / 6 / 10 / 8; }
+    .div7_card { 
+        
+        text-align: center;
+        grid-area: 8 / 4 / 10 / 6; }
+    .div8_card { 
+        
+        text-align: center;
+        grid-area: 8 / 2 / 10 / 4; }
+    .div9_card {
+        text-align: center;
+        grid-area: 10 / 6 / 12 / 8; }
+    .div10_card { 
+        text-align: center;
+         grid-area: 10 / 4 / 12 / 6; }
+    .div11_card {
+        text-align: center;
+        grid-area: 10 / 2 / 12 / 4; }
+
+        .price_style{
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    text-align: right;
+    min-width: calc(60% - 10px);
+}
+.address_tile_style{
+    font-size: .875rem;
+    color: #363636;
+    line-height: 1.0625rem;
+}
+.data_style{
+    border-top: 1px solid rgba(0,0,0,.1);
+    margin-top: 6px;
+    font-size: .75rem;
+}
+.data_title_style{
+    font-size: .75rem;
+    color: rgba(0,0,0,.5);
+}
+.updated_today{
+    color: rgba(0,0,0,.5);
+    font-size: .75rem;
+    line-height: 12px;
+}
+
+
+     .img1 {
+         max-width: 141px;
+         max-height: 98%;
+         min-height: 97%;
+        border-radius: 5px;
+    } 
+    .parent_shop_filters {
+        display: grid;
+        /* grid-template-columns: repeat(4, 1fr); */
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        max-width: 94vw;
+        margin: 0 auto;   
+        margin-top: 100px !important;
+        text-align: center;
+        }
+        
+        .div1_shop_filters {
+    min-width: 100px !important;
+    grid-area: 1 / 4 / 2 / 5; }
+        .div2_shop_filters {
+    min-width: 100px !important;
+    grid-area: 1 / 3 / 2 / 4; }
+        .div3_shop_filters { grid-area: 1 / 2 / 2 / 3; }
+        .div4_shop_filters {
+    min-width: 80px !important;
+    grid-area: 1 / 1 / 2 / 2; }
+        .div5_shop_filters { grid-area: 2 / 1 / 3 / 5; }
+        .div6_shop_filters { grid-area: 3 / 2 / 4 / 3; }
+        .div7_shop_filters { grid-area: 3 / 3 / 4 / 4; }
+
+.sort_button_main{
+    border: 1px solid black;
+    padding: 3px;
+}
+.filter_button_main{
+    border: 1px solid black;
+    padding: 3px;
+}
+.map_button_main{
+    border: 1px solid #0fca80;
+    padding: 4px;
+}
+.note_for_user{
+    text-align: right;
+    height: 60px;
+    width: 100%;
+    margin-bottom: -10px;
+    border-radius: 2px;
+    border: unset;
+    display: flex;
+    /* padding: 0 10px; */
+    align-items: center;
+    /* justify-content: space-between; */
+    box-shadow: 0 3px 10px 0 rgb(0 0 0 / 15%);
+}
+.amount_of_products{
+    /* margin-top: -30px; */
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    margin:10px auto
+}
+.sort_list{
+text-align: right;
+/* float: right; */
+}
+.sort_list input {
+    padding: 10px;
+    color: orange;
+    background-color: orange;
+    /* opacity: 0; */
+    /* width: 0; */
+    /* height: 0; */
+  }
+.sort_list_check{
+    display: inline-block;
+}
+.sort_list_span{
+    display: inline-block;
+}
+.radio_title{
+    margin-right: 10px;
+}
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 200px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+      
+  
+  }
+  
+  /* Hide the browser's default radio button */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a custom radio button */
+  .checkmark {
+    border:3px solid gray;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 50%;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the radio button is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: white;
+        border:2px solid orange;
+  
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    color:black;
+    
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .container .checkmark:after {
+       top: 2px;
+      left: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: orange;
+  }
+  .radios_list{
+      text-align: right;
+      direction: rtl;
+  }
+  .fixed_searchBar{
+      width: 100vw;
+      position: absolute;
+      top: 8%;
+      left: 0;
+    align-items: center;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 6px 0 rgb(0 0 0 / 10%);
+    background-color: #fff;
+    height: 50px;
+    z-index: 10 !important;
+    
+  }
+  
+  .fixed_searchBar_text{
+    /* width: calc(100% - 87px); */
+    font-family: Rubik,sans-serif;
+    font-size: .875rem;
+    line-height: 1.0625rem;
+    border: none;
+    background: #fff;
+    color: #999;
+    float: right;
+    text-align: right;
+  }
+  .lineSearch_container{
+      width: 95vw;
+      
+      margin-left: -15px;
+      /* border: 2px solid blue; */
+  }
+
+  .parent_line_sort {
+    display: grid;
+    text-align: right;
+    /* background-color: lawngreen; */
+    width: 95vw;
+    max-width: 695px;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    margin: 10px auto 0;
+    }
+    
+    .div1_line_sort { grid-area: 1 / 7 / 2 / 8; }
+    .div2_line_sort { grid-area: 1 / 5 / 2 / 7; }
+    .div3_line_sort { grid-area: 1 / 4 / 2 / 5; }
+    .div4_line_sort { grid-area: 1 / 3 / 2 / 4; }
+    .div5_line_sort { grid-area: 1 / 2 / 2 / 3; }
+    .div6_line_sort { grid-area: 1 / 1 / 2 / 2; }
+ .sort_drop_down{
+     direction: rtl;
+     width: 100%;
+     text-align: right;
+     padding-left: 26px;
+     min-width: 170px;
+    margin-right: 5px;
+    vertical-align: middle;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
+    border-radius: 2px;
+    padding: 0 10px 0 15px;
+    cursor: pointer;
+    font-size: .875rem;
+    line-height: 1.0625rem;
+    line-height: 35px;
+    height: 100%;
+ }
+ .sort_only_pic{
+    direction: rtl;
+    width: 100%;
+    text-align: right;
+   vertical-align: middle;
+   border: 1px solid #dbdbdb;
+   background-color: #fff;
+   border-radius: 2px;
+   padding: 0 10px 0 15px;
+   cursor: pointer;
+   font-size: .875rem;
+   line-height: 1.0625rem;
+   line-height: 35px;
+   height: 100%;
+    
+ }
+ .sort_by{
+    font-size: .875rem;
+    line-height: 1.0625rem;
+    margin-top: 14px;
+ }
+ .sort_drop_down_field_text{
+    font-size: .875rem;
+    line-height: 1.0625rem;
+ }
+ .another_search{
+    color: #ff7100;
+    font-size: .875rem;
+    line-height: 1.0625rem;
+ }
+ .search_icon{
+    color: #999;
+ }
+ .piked_one{
+     color: blueviolet;
+ }
+ .notPickedOne{
+     color: #000;
+ }
