@@ -1,36 +1,24 @@
 import React, { useState, useEffect,useContext, useReducer } from "react";
 import { useHistory } from "react-router-dom";
-import { API } from "../config";
 import SearchContext from "../context/search-context";
-import { getFilteredProducts } from "./apiCore";
-import '../css/searchForm.css'
-import './../css/LineSearch.css'
 import { BsSearch,BsXCircle,BsQuestionCircle,BsPlusCircle } from 'react-icons/bs';
 import {submitSearchControl} from './../controller/searchControl';
-import { dateHelper,roomsQuickButtonFuncHelper,priceQuickButtonFuncHelper,inputChangeHandlerHelper,changeRoomSelectionHelper,changeFloorSelectionHelper } from "../controller/searchFormHelper";
+import { dateHelper,changeRoomSelectionHelper,changeFloorSelectionHelper } from "../controller/searchFormHelper";
+import '../css/searchForm.css'
+import './../css/LineSearch.css'
 
 const LineSearch = () => {
-  const { searchParameters,setSearchParameters } = useContext(SearchContext);
-
-
   let history = useHistory();
+  const { searchParameters,setSearchParameters } = useContext(SearchContext);
   const [dropDown,setDropDown]=useState(false)
   const [dropDownRooms,setdropDownRooms]=useState(false)
   const [dropDownAdvanced,setDropDownAdvanced]=useState(false)
-    const [myFilters, setMyFilters] = useState({
-        filters: { category: [], price: [] }
-    });
-    const [numOfRooms,setNumOfRooms]= useState([1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12])
-    const [numOfFloors,setNumOfFloors]= useState(['פרטר/מרתף',1,2,3,4,5,6,7,8,9,10,11,12,13,14])
-    const [error, setError] = useState(false);
-    const [limit, setLimit] = useState(6);
-    const [skip, setSkip] = useState(0);
-    const [size, setSize] = useState(0);
-    const [filteredResults, setFilteredResults] = useState([]);
-    const [numberOfRadioSelected,setNumberOfRadioSelected]=useState(0)
-    let countRadiosCheck=numberOfRadioSelected;
+  const [numOfRooms,setNumOfRooms]= useState([1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12])
+  const [numOfFloors,setNumOfFloors]= useState(['פרטר/מרתף',1,2,3,4,5,6,7,8,9,10,11,12,13,14])
+  const [numberOfRadioSelected,setNumberOfRadioSelected]=useState(0)
     
-
+  let countRadiosCheck=numberOfRadioSelected;
+    
     const date = (event) => {
       let res=dateHelper(searchParameters,event)
       console.log(res,'resresres')      
@@ -66,46 +54,30 @@ const radiosChange=(e)=>{
         console.log(searchParameters,'search parameters from context') 
     } 
 
-    const loadFilteredResults = newFilters => {
-        getFilteredProducts(skip, limit, newFilters).then(data => {
-            if (data.error) {
-                setError(data.error);
-            } else {
-                setFilteredResults(data.data);
-                setSize(data.size);
-                setSkip(0);
-            }
-        });
-    };
-
     const changeRoomSelection=(e)=>{
       let res=changeRoomSelectionHelper(e)
-      console.log(res);
       setNumOfRooms(res.NumOfRooms)
       setSearchParameters({...searchParameters, min_num_of_rooms: res.min_num_of_rooms})
-              let num=document.getElementById('selectRooms').value
              }
 
-             const changeFloorSelection=(e)=>{
-              let res=changeFloorSelectionHelper(e)
-              setNumOfFloors(res.NumOfFloors)
-              setSearchParameters({...searchParameters, min_num_of_floors: res.min_num_of_floors})
-              console.log(searchParameters)
+    const changeFloorSelection=(e)=>{
+      let res=changeFloorSelectionHelper(e)
+      setNumOfFloors(res.NumOfFloors)
+      setSearchParameters({...searchParameters, min_num_of_floors: res.min_num_of_floors})
             }
 
 
     useEffect(() => {
-        loadFilteredResults(skip, limit, myFilters.filters);
     }, []);
 
     const openDropDown=()=>{
-setDropDown(!dropDown)
+      setDropDown(!dropDown)
 !dropDown?
 document.getElementById('dropDown_arrow').innerHTML=('&#708;'):
 document.getElementById('dropDown_arrow').innerHTML=('&#709;')
     }
 
-    const openDropDownRooms=()=>{
+  const openDropDownRooms=()=>{
       setdropDownRooms(!dropDownRooms)
       !dropDownRooms?
       document.getElementById('dropDown_arrow_rooms').innerHTML=('&#708;'):
@@ -123,7 +95,7 @@ document.getElementById('dropDown_arrow').innerHTML=('&#709;')
           }
                 }
 
-//-----------------------------------------------return---------------------------------------------------
+//-----------------------------------------------return--------------------------------------------------------//
     return (
 <div className={'parent_lineSearch_upper'} style={{width:'90vw',margin:'70px auto 0',textAlign:'right'}}>
   

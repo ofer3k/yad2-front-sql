@@ -1,5 +1,7 @@
 import { API } from "../config";
 
+
+
 export const createCategory = (userId, token, category) => {
     return fetch(`${API}/category/create/${userId}`, {
         method: "POST",
@@ -41,7 +43,6 @@ export const uploadImage = ({formData}) => {
 export const createProduct = (userId, token, product) => {
     var data = new FormData();
     data.append( "json", JSON.stringify( product ) );
-
     return fetch(`${API}/product/create/${userId}`, {
         method: "POST",
         headers: {
@@ -67,6 +68,38 @@ export const createProduct = (userId, token, product) => {
         });
 };
 
+// 
+
+
+export const createProductSQL = (userId, token, product) => {
+    var data = new FormData();
+    data.append( "json", JSON.stringify( product ) );
+    console.log(data)
+    return fetch(`${API}/products/insert/mssql/${userId}`, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        body: data
+    })
+        .then(response => {
+            if(response.ok)
+            {
+                console.log('product',product)
+                return response.json();
+            }
+            else{
+                throw new Error('בעיה ביצירת המודעה');
+            }
+            
+        })
+        .catch(err => {
+            return({err:'משהו השתבש בהעלאת המודעה'})
+
+        });
+};
+// 
 export const getCategories = () => {
     return fetch(`${API}/categories`, {
         method: "GET"

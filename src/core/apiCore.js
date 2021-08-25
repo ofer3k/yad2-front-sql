@@ -11,6 +11,16 @@ export const getProducts = sortBy => {
         .catch(err => console.log(err));
 };
 
+export const getAllApartments = () => {
+    return fetch(`${API}/products/by/search/sql`, {
+        method: "GET"
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
+
 export const getCategories = () => {
     return fetch(`${API}/categories`, {
         method: "GET"
@@ -27,7 +37,7 @@ export const getFilteredProducts = (skip, limit, filters = {}) => {
         skip,
         filters
     };
-    return fetch(`${API}/products/by/search`, {
+    return fetch(`${API}/products/by/search/sql`, {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -75,7 +85,7 @@ export const listRelated = productId => {
         .catch(err => console.log(err));
 };
 export const listProductsByUser = userId => {
-    return fetch(`${API}/products/by/user/${userId}`, {
+    return fetch(`${API}/products/get/user/apartments/${userId}`, {
         method: "GET"
     })
         .then(response => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect,useContext } from "react";
 import ProductContext from "../context/product-context";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
-import { createProduct, getCategories,uploadImage } from "./apiAdmin";
+import { getCategories,uploadImage,createProductSQL } from "./apiAdmin";
 import { FaRegSnowflake,FaWheelchair,FaShekelSign } from 'react-icons/fa';
 import { FiBox } from 'react-icons/fi';
 import { BiBox,BiCabinet} from 'react-icons/bi';
@@ -15,7 +15,6 @@ import { API } from "../config";
 import './../css/addProduct.css'
 import '../css/addProductResponsiv.css'
 
-
 let picsList={
   pic1:'',
   pic2:'',
@@ -27,21 +26,14 @@ let picsList={
 const mq = window.matchMedia( "(max-width: 690px)" );   
 const AddProduct = () => {
 // context
-  const {valuesContext,
+  const {
+    valuesContext,
     setValuesContext,
     radiosContext,
     setRadiosContext
   } = useContext(ProductContext);
   // 
-  const [fileInput,setFileInput]=useState('')
   const [videoInput,setVideoInput]=useState('')
-  const [pic1,setPic1]=useState('')
-  const [pic2,setPic2]=useState('')
-  const [pic3,setPic3]=useState('')
-  const [pic4,setPic4]=useState('')
-  const [photosList,setPhotosList]=useState('')
-let myArray=[]
-const [selectedFile,setSelectedFile]=useState('')
 const [previewSource,setPreviewSource]=useState('')
 const [previewVideo,setPreviewVideo]=useState('')
 const [previewPic1,setPreviewPic1]=useState('')
@@ -56,12 +48,10 @@ const [thirdCircleClass,setthirdCirclrClass]=useState('circle_before_select')
 const [forthCircleClass,setForthCirclrClass]=useState('circle_before_select')
 const [fifthCircleClass,setFifthCirclrClass]=useState('circle_before_select')
 const [sixthCirclrClass,setSixthCirclrClass]=useState('circle_before_select')
-
-
-
-
+const [isPicUploaded,setIsPicUploaded]=useState(true)
 
 const uploadImageToCloud=async (base64,video,pic1,pic2,pic3,pic4)=>{
+  setIsPicUploaded(false)
   try {
     await fetch(`${API}/upload`,{
       // method:'POST',
@@ -74,21 +64,18 @@ const uploadImageToCloud=async (base64,video,pic1,pic2,pic3,pic4)=>{
 p.then(async function(v) {
   console.log(v.url)
   setImagesUrlList([...imagesUrlList, v.url]);
-  // setImagesUrlList(v.url)
   picsList.pic1=v.url
   console.log('myPics',picsList)
 });
     } )
     await fetch(`${API}/upload`,{
-      // method:'POST',
       body:JSON.stringify({date:base64,name:isAuthenticated().user.name}),
       method: 'POST',
   headers: { 'Content-Type': 'application/json',
   'Access-Control-Allow-Origin': '*',}
     }).then(response =>{
       var p = Promise.resolve(response.json());
-p.then(async function(v) {
-  // setImagesUrlList(v.url)
+      p.then(async function(v) {
   setImagesUrlList([...imagesUrlList, v.url]);
   picsList.pic2=v.url
   console.log('myPics',picsList)});
@@ -96,7 +83,6 @@ p.then(async function(v) {
 
     if(pic1){
       await fetch(`${API}/upload`,{
-        // method:'POST',
         body:JSON.stringify({date:pic1,name:isAuthenticated().user.name}),
         method: 'POST',
     headers: { 'Content-Type': 'application/json',
@@ -111,7 +97,6 @@ p.then(async function(v) {
       } )
     }
     if(pic2){await fetch(`${API}/upload`,{
-      // method:'POST',
       body:JSON.stringify({date:pic2,name:isAuthenticated().user.name}),
       method: 'POST',
   headers: { 'Content-Type': 'application/json',
@@ -126,7 +111,6 @@ p.then(async function(v) {
     } )
   }
     if(pic3){await fetch(`${API}/upload`,{
-      // method:'POST',
       body:JSON.stringify({date:pic3,name:isAuthenticated().user.name}),
       method: 'POST',
   headers: { 'Content-Type': 'application/json',
@@ -142,7 +126,6 @@ p.then(async function(v) {
   }
     if(pic4){
       await fetch(`${API}/upload`,{
-        // method:'POST',
         body:JSON.stringify({date:pic4,name:isAuthenticated().user.name}),
         method: 'POST',
     headers: { 'Content-Type': 'application/json',
@@ -159,6 +142,7 @@ p.then(async function(v) {
   } catch (error) {
     console.log(error)
   }
+  setIsPicUploaded(true)
 }
 
 const handleFileInputChange=(e)=>{
@@ -288,7 +272,7 @@ reader.onloadend=()=>{
     } = values;
     // load categories and set form data
     const init = () => {
-        getCategories().then(data => {
+        // getCategories().then(data => {
             // if (data.error) {
             //     setValues({ ...values, error: data.error });
             // } else {
@@ -298,7 +282,7 @@ reader.onloadend=()=>{
             //         formData: new FormData()
             //     });
             // }
-        });
+        // });
     };
     
   
@@ -309,7 +293,11 @@ reader.onloadend=()=>{
     
     const finishUpload=(route)=>{
       setValuesContext({ ...valuesContext, 'Route': route })
+      if(isPicUploaded)
       clickSubmit()
+      return
+      // clickSubmit()
+      return
     }
     const handleCheckTerms=(e)=>{
       let value=e.target.checked
@@ -566,7 +554,7 @@ reader.onloadend=()=>{
         picsList.pic2=switchig1
         let obj={fullForm:valuesContext,redioButtons:radiosContext,pics:picsList}
         try {
-          createProduct(user._id, token, obj).then(console.log('new post is cool cool cool')).then(res=>{
+          createProductSQL(user._id, token, obj).then(console.log('new post is cool cool cool')).then(res=>{
             console.log(res)
             if(res.err)
             {
@@ -1564,8 +1552,11 @@ placeholder={`זה המקום לתאר את הפרטים הבולטים, למש�
   {isSelected=='6'&&!(mq.matches)&&
   <div style={{paddingRight:'5.5%',marginTop:'10px'}}>
   <span className={'pick_route_title'}>זהו, אנחנו בסוף. לנו נשאר לשמור את המודעה שלך, לך נשאר לבחור את מסלול הפרסום.</span>
+
 <hr style={{marginLeft:'20px',background:'black'}} />    
 <span style={{fontWeight:'400'}} className={'pick_route_title'}>באיזה מסלול לפרסם את המודעה? זה הרגע לבלוט מעל כולם</span>
+{!isPicUploaded&&<p className={'waiting_for_pic_msg'}>מחכה שהתמונות יעלו בצורה מלאה</p>}
+
 <div class="parent_routes">
 <div class="div1_routes basic_route">
   <div style={{backgroundColor:'rgb(252,251,251)'}} class="parent_basic">
@@ -1579,7 +1570,7 @@ placeholder={`זה המקום לתאר את הפרטים הבולטים, למש�
   <span className={'route_not_include'}>הקפצה אוטומטית לחסכון בזמן  &#10005;
 </span>
   </div>
-  <div onClick={()=>{finishUpload('basic') }} class="div4_basic">
+  <div onClick={()=>{finishUpload('basic') }} className={!isPicUploaded?"pic_upload_not_finish div4_basic":"div4_basic"}>
   <span className={'not_vip_button'}>  
     <span>חינם</span>
     <span> / 120 ימים</span>
@@ -1604,7 +1595,7 @@ placeholder={`זה המקום לתאר את הפרטים הבולטים, למש�
 <div class="div5_vip">
 <span className={'route_include'} >הופעה לפני הודעות רגילות וורודות  &#10003;</span>
 </div>
-<div onClick={()=>{finishUpload('vip') }} class="div6_vip">
+<div onClick={()=>{finishUpload('vip') }} className={!isPicUploaded?"pic_upload_not_finish div6_vip":"div6_vip"}>
   <span className={'vip_button'}>
   <span>199 <FaShekelSign/>  </span>
   <span className={'vip_button__days'}> / 28 ימים</span>
@@ -1625,7 +1616,7 @@ placeholder={`זה המקום לתאר את הפרטים הבולטים, למש�
   <span className={'route_include'}>הקפצה אוטומטית לחסכון בזמן  &#10003;
 </span>
   </div>
-  <div onClick={()=>{finishUpload('marked') }} style={{direction:'rtl'}} class="div4_basic">
+  <div onClick={()=>{finishUpload('marked') }} style={{direction:'rtl'}} className={!isPicUploaded?"pic_upload_not_finish div4_basic":"div4_basic"}>
   <span style={{color:'#ff7100',backgroundColor:'white'}} className={'vip_button'}>
   <span  >99 <FaShekelSign/>  </span>
   <span className={'vip_button__days'}> / 28 ימים</span>
@@ -1641,8 +1632,8 @@ placeholder={`זה המקום לתאר את הפרטים הבולטים, למש�
   </div>}
   {isSelected=='6'&&(mq.matches)&&
   <div style={{paddingRight:'5.5%',marginTop:'10px'}}>
-    
     <span className={'pick_route_title'}>זהו, אנחנו בסוף. לנו נשאר לשמור את המודעה שלך, לך נשאר לבחור את מסלול הפרסום.</span>
+    {!isPicUploaded&&<p className={'waiting_for_pic_msg'}>מחכה שהתמונות יעלו בצורה מלאה</p>}
 <hr style={{marginLeft:'20px',background:'black'}} />    
 <span style={{fontWeight:'400'}} className={'pick_route_title'}>באיזה מסלול לפרסם את המודעה? זה הרגע לבלוט מעל כולם</span>
 <div class="parent_route_s_sc">

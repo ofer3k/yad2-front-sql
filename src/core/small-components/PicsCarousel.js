@@ -12,21 +12,19 @@ const [pic4,setPic4]=useState('')
 const [pic5,setPic5]=useState('')
 const [pic6,setPic6]=useState('')
 const productId = props.match.params.productId
-
 console.log(productId,'productId')
 
-function submitSearchControl(productId){
-  fetch(`${API}/single/product`,
-{
+function initialPhotos(productId){
+return fetch(`${API}/products/get/apartment/${productId}`, {
+  method: "GET",
   headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
+      Accept: "application/json",
+      "Content-Type": "application/json",
   },
-  method: "POST",
-  body: JSON.stringify({productId})
 })
-.then(function(res){ res.json().then(body =>  { 
-if(body[0].hasOwnProperty('pic1'))
+.then((res)=>{res.json().then(body =>  { 
+  console.log(body)
+  if(body[0].hasOwnProperty('pic1'))
   body[0].pic1.length>10?setPic1(body[0].pic1):setPic1('https://irishgardenplantsociety.com/wp-content/uploads/2015/10/no-image-available.gif')  
 if(body[0].hasOwnProperty('pic2'))
   body[0].pic2.length>10?setPic2(body[0].pic2):setPic2('https://irishgardenplantsociety.com/wp-content/uploads/2015/10/no-image-available.gif')
@@ -38,17 +36,15 @@ if(body[0].hasOwnProperty('pic5'))
   body[0].pic5.length>10?setPic5(body[0].pic5):setPic5('https://irishgardenplantsociety.com/wp-content/uploads/2015/10/no-image-available.gif')
 if(body[0].hasOwnProperty('pic6'))
   body[0].pic6.length>10?setPic6(body[0].pic6):setPic6('https://irishgardenplantsociety.com/wp-content/uploads/2015/10/no-image-available.gif')
- }); })
-.catch(function(res){ console.log(res) })
+ });
+ })
+  .catch(err => {
+      console.log(err);
+  }); 
 }
-
-
-
-// 
+  
 useEffect(() => {
-  // Update the document title using the browser API
-  submitSearchControl(productId)
-  // document.title = `You clicked ${count} times`;
+  initialPhotos(productId)
 },[]);
     return (
         <div className={'full_page_background'}>
@@ -61,14 +57,12 @@ useEffect(() => {
         <AwesomeSlider>
         <div>
             <img src={pic1}></img>
-            
         </div>
         <div>     
         <video width="320" height="240" controls>
   <source src={pic2} type="video/mp4"/>
 Your browser does not support the video tag.
-</video>
-     {/*  */}
+        </video>
         </div>
         <div>
         <img className={'img_fitter'} src={pic3}></img>

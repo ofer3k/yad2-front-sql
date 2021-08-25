@@ -1,9 +1,9 @@
 import React, { useState, useEffect,useContext,useReducer } from "react";
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 import Layout from "./Layout";
 import CardYad2 from "./CardYad2";
 import CardYad2Acordion  from "./CardYad2Acordion";
-import { getCategories, getFilteredProducts } from "./apiCore";
+import { getCategories, getFilteredProducts,getAllApartments } from "./apiCore";
 import { BiFilterAlt } from 'react-icons/bi';
 import { RiMapPinLine } from 'react-icons/ri';
 import { useHistory } from "react-router-dom";
@@ -24,7 +24,6 @@ const Shop = (state) => {
     const [myFilters, setMyFilters] = useState({
         filters: { category: [], price: [] }
     });
-    const [error, setError] = useState(false);
     const [limit, setLimit] = useState(6);
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(0);
@@ -34,11 +33,13 @@ const Shop = (state) => {
     const [fullLength, setFullLength] = useState(3);
     const [isMorePosts, setIsMorePosts] = useState(true); 
     const [numOfScrolling, setNumOfScrolling] = useState(4);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalVisible2, setIsModalVisible2] = useState(false);
     
     const sorting=(dir,filteredResults)=>{
         setFilteredResults(shallowPriceSort(dir,filteredResults)) 
      }
-const [isModalVisible, setIsModalVisible] = useState(false);
+// modal one functionality
     const showModal = () => {
         setIsModalVisible(true);
     };
@@ -48,8 +49,7 @@ const [isModalVisible, setIsModalVisible] = useState(false);
     const handleCancel = () => {
         setIsModalVisible(false);
     };
- 
-    const [isModalVisible2, setIsModalVisible2] = useState(false);
+// modal two functionality 
     const showModal2 = () => {
         setIsModalVisible2(true);
     };
@@ -62,7 +62,7 @@ const [isModalVisible, setIsModalVisible] = useState(false);
  
 function sortCCC() {
     setSortMethod(document.getElementById('sort_drop_down_id').value)
-    submitSearchControlScroll(numOfScrolling,history,filtersAfterSearch,document.getElementById('sort_drop_down_id').value)
+    // submitSearchControlScroll(numOfScrolling,history,filtersAfterSearch,document.getElementById('sort_drop_down_id').value)
 }
     
      window.onscroll = function() {
@@ -70,13 +70,13 @@ function sortCCC() {
 {   
     console.log(filteredResults.length,'filteredResults.length')         
     console.log(fullLength,'fullLength')         
-    submitSearchControlScroll(numOfScrolling,history,filtersAfterSearch,sortMethod)
+    // submitSearchControlScroll(numOfScrolling,history,filtersAfterSearch,sortMethod)
 }
           }
 };
 
 function submitSearchControlScroll(num,history,filters,sortMethod){
-    fetch(`${API}/products/by/Filter/noSort`,
+    fetch(`${API}/products/by/Filter/noSort/sql`,
   {
     headers: {
       'Accept': 'application/json',
@@ -87,7 +87,9 @@ function submitSearchControlScroll(num,history,filters,sortMethod){
   })
   .then(function(res){ res.json().then(body =>  {
     setFullLength(body.fullLength||4)
-    if(!state.location.state.body.fullLength)
+    if(!state.location.state
+        // .body.fullLength
+        )
     setIsMorePosts(false)
     setSortMethod(body.sortMethod)
     setFilteredResults(body.data||[])
@@ -99,33 +101,29 @@ function submitSearchControlScroll(num,history,filters,sortMethod){
  }); })
   .catch(function(res){ console.log(res) })
   }
+  
     const loadFilteredResults = newFilters => {
+        // console.log(state.location.state.body.data[0],'state.location.state')
         if(state.location.state== undefined){
-            getFilteredProducts(skip, limit, newFilters).then(data => {
-                if (data.error) {
-                    setError(data.error);
-                } else {
-                    setFilteredResults(data.data||[]);
-                    setOriginalFullList(data.data)
-                    console.log(data.data,'data.data')
-                    setSize(data.size);
+            getAllApartments().then(data=>{
+                console.log(data,'data')
+                    setFilteredResults(data.data[0]||[]);
+                    setOriginalFullList(data.data[0]||[])
+                    setSize(data.size[0]);
                     setSkip(0);
-                }
             })
         }
         else{
-            // console.log(state.location.state.body.data)
-            // console.log(state.location.state.body.fullLength,'state.location.state.body.fullLength')
-            // console.log(state.location.state.body.FiltersAfterSearch,'state.location.state.body.FiltersAfterSearch')
-            // console.log(state.location.state.body.num||0,'state.location.state.body.num')
-            // console.log(state.location.state.body.sortMethod,'state.location.state.body.sortMethod')
+            console.log(state.location,'from serach data')
+            // to get the last filter string look inside state.location.state.body.FiltersAfterSearch
             setFullLength(state.location.state.body.fullLength||4)
             if(!state.location.state.body.fullLength)
             setIsMorePosts(false)
-            setSortMethod(state.location.state.body.sortMethod)
+            // setSortMethod(state.location.state.body.sortMethod)
             setFilteredResults(state.location.state.body.data||[])
             setFiltersAfterSearch(state.location.state.body.FiltersAfterSearch)
             setNumOfScrolling(state.location.state.body.num||0)
+            setFilteredResults(state.location.state.body.data[0])
             setOriginalFullList(state.location.state.body.data)
                     setSize(state.location.state.body.size);
                     setSkip(0);
@@ -136,20 +134,6 @@ function submitSearchControlScroll(num,history,filters,sortMethod){
         loadFilteredResults(skip, limit, myFilters.filters);
     }, []);
 
-
-    const priceSort = (condition,filteredResults) => {
-        let saver=filteredResults
-        let ordered;
-        if(condition=='lowToHigh')
-        {
-            ordered = saver.sort((a, b) => (a.price > b.price) ? 1 : -1)
-        }
-        if(condition=='highToLow'){
-            ordered = saver.sort((a, b) => (a.price > b.price) ? -1 : 1)
-        }
-        setFilteredResults([...ordered])
-        console.log(filteredResults)
-      }
       const dateSort = () => {
         let ordered=filteredResults
         ordered.sort(function(a,b){
@@ -157,8 +141,6 @@ function submitSearchControlScroll(num,history,filters,sortMethod){
           });
         setFilteredResults([...ordered])
           console.log(ordered)
-        
-        // setFilteredResults([...ordered])
         console.log(filteredResults)
       }
 

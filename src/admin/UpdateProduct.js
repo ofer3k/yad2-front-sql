@@ -1,26 +1,28 @@
 import React,{useState,useContext,useEffect} from 'react'
 import { API } from "./../config";
+import { useHistory } from "react-router-dom";
 import NavBarPersonal from './../core/small-components/PrivateArea'
 import productUpdateContext from "./../context/product-update-context";
 import {changePropertyTypeName,changePropertyConditionName} from './../controller/updateProduct'
-import './../css/updateProduct.css'
 import { RiDeleteBin6Line} from 'react-icons/ri';
-
+import './../css/updateProduct.css'
 // import {initProductForUpdate} from './../controller/updateProduct'
+
 export default function UpdateProduct(props) {
+    let history = useHistory();
   const {product,dispatch} = useContext(productUpdateContext);
   const [success,setSuccess]=useState(false)
   const [fail,setfail]=useState(false)
   console.log(product)
 
   const initProductForUpdate=(id)=>{
-return fetch(`${API}/single/product`, {
-    method: "POST",
+
+return fetch(`${API}/products/get/apartment/${id}`, {
+    method: "GET",
     headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
     },
-    body: JSON.stringify({productId:id})
 })
 .then(function(res){ res.json().then(body =>  { 
     dispatch({type:'init_product',product:body[0]})
@@ -29,35 +31,29 @@ return fetch(`${API}/single/product`, {
         console.log(err);
     });
 }  
-
 const handleChange=(name,value)=>{
     dispatch({type:'change_field',name,value})
 }
-
 const SubmitDeleteProduct=()=>{
-    fetch(`${API}/single/product/delete`, {
-       method: "POST",
+    fetch(`${API}/products/delete/apartment/${product._id}`, {
+       method: "DELETE",
        headers: {
            Accept: "application/json",
            "Content-Type": "application/json"
        },
-       body: JSON.stringify({product})
+    //    body: JSON.stringify(product._id)
    })
-       .then(response => {
-console.log(response.json())
-setSuccess(true)
-document.getElementById('submit_update_buttom').disabled = true
-document.getElementById('submit_update_buttom').classList = 'disabled_button'
+    .then(() => {
+        history.push("/shop");
 return
-})
-       .catch(err => {
+}).catch(err => {
            setfail(true)
            console.log(err);
-       });
+    });
 }
 
 const SubmitUpdateProduct=()=>{
-     fetch(`${API}/single/product/update`, {
+     fetch(`${API}/single/product/update/sql`, {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -66,10 +62,10 @@ const SubmitUpdateProduct=()=>{
         body: JSON.stringify({product})
     })
         .then(response => {
-console.log(response.json())
-setSuccess(true)
-document.getElementById('submit_update_buttom').disabled = true
-document.getElementById('submit_update_buttom').classList = 'disabled_button'
+    console.log(response.json())
+    setSuccess(true)
+    document.getElementById('submit_update_buttom').disabled = true
+    document.getElementById('submit_update_buttom').classList = 'disabled_button'
 return
 })
         .catch(err => {
@@ -82,8 +78,7 @@ useEffect(() => {
   },[]);
   return (
         <div>
-            <NavBarPersonal/>
-            
+            <NavBarPersonal/>            
             <div className={'details_headline'}>
             <span  ><button className={'delete_button'} onClick={SubmitDeleteProduct}><RiDeleteBin6Line/></button></span>
             <span className={'details_headline__text'}>פרטי המודעה</span>

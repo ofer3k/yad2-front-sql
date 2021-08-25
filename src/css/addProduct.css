@@ -561,3 +561,10 @@ display: none;
     width: fit-content;
     margin:10px auto 80px;
 }
+.pic_upload_not_finish{
+    opacity: 0.2;
+}
+.waiting_for_pic_msg{
+    width: fit-content;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}

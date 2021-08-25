@@ -114,7 +114,7 @@ console.log(res,'res');
 
     useEffect(() => {
         // init();
-        loadFilteredResults(skip, limit, myFilters.filters);
+        // loadFilteredResults(skip, limit, myFilters.filters);
     }, []);
 
 
